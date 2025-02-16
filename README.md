@@ -19,7 +19,7 @@ SERVER_PORT=8080
 ### 2. 
 ```bash
 docker-compose build
-docker-compose up -d
+docker-compose up
 ```
 
 # Тестирование и линтер
