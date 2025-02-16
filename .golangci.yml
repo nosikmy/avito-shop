@@ -1,0 +1,57 @@
+run:
+  # timeout for analysis, e.g. 30s, 3m, default is 1m
+  timeout: 3m
+  # exclude test files
+  tests: false
+
+linters:
+  disable-all: true
+  enable:
+    # bugs/error
+    - staticcheck
+    - gosec
+    - errcheck
+
+    # performance
+    - prealloc
+
+    # style, formatting
+    - gofmt
+    - goconst
+    - unconvert
+    - misspell
+    - unparam
+    - nakedret
+    - tagliatelle
+    - dupl
+
+linters-settings:
+  gofmt:
+    rewrite-rules:
+      - pattern: 'a[b:len(a)]'
+        replacement: 'a[b:]'
+
+  misspell:
+    locale: US
+
+  errcheck:
+    check-type-assertions: true
+  dupl:
+    # Tokens count to trigger issue, default: 150
+    threshold: 100
+
+  tagliatelle:
+    case:
+      rules:
+        json: camel
+        yaml: snake
+        env: upperSnake
+        envconfig: upperSnake
+
+issues:
+  max-same-issues: 0
+  max-issues-per-linter: 0
+  exclude-use-default: false
+  exclude:
+    # gosec: Duplicated errcheck checks
+    - G104
